@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will you be my valentine?</title>
+<style>
+  body {
+    background-image: url('bg.gif');
+    background-color: #ff69b4;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Arial', sans-serif;
+  }
+  h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #ff69b4; 
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); 
+  }
+  #valentineForm {
+    text-align: center;
+  }
+  #yesButton, #noButton, #watchButton {
+    background-color: #ff69b4; 
+    color: white; 
+    border: none;
+    padding: 10px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: all 0.3s ease; 
+  }
+  #yesButton:hover, #noButton:hover, #watchButton:hover {
+    background-color: #d44a86; 
+  }
+  #valentineImage {
+    width: 350px;
+    height: 350px;
+    animation: moveImage 2s infinite alternate;
+  }
+  #noButton {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+  }
+ 
+  #valentineForm input[type="submit"], #valentineForm input[type="button"] {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  @keyframes moveImage {
+    from { transform: translateX(-10px); }
+    to { transform: translateX(10px); }
+  }
+  .enlarge {
+    transform: scale(1.1); 
+  }
+</style>
+</head>
+<body>
+<center>
+  <form id="valentineForm">
+    <input id="watchButton" type="button" value="Watch This First" onclick="redirectToYouTube()">
+    <img id="valentineImage" src="two.png" alt="Picture of you">
+    <h1>Will you be my valentine, Ruth?</h1>
+  </form>
+</center>
+<form id="valentineForm">
+  <input id="yesButton" type="button" value="Yes" onclick="redirectToYesPage()">
+  <input id="noButton" type="button" value="No" onclick="sendEmailAndRedirect('No')">
+</form>
+<script>
+  function sendEmailAndRedirect(answer) {
+    sendEmail(answer);
+    window.location.href = "https://www.youtube.com/watch?v=uQnIGTaEiFU";
+  }
+
+  function redirectToYouTube() {
+    window.location.href = "https://youtu.be/5r7kPy6DsHk?si=8-R0_xnN9fqlXcXI";
+  }
+
+  function redirectToYesPage() {
+    window.location.href = "yes.html";
+  }
+
+  function sendEmail(answer) {
+    let subject = encodeURIComponent("Valentine's Day Response");
+    let body = encodeURIComponent(`Ruth said ${answer}!`);
+    window.location.href = `mailto:vallejoraianlee@gmail.com?subject=${subject}&body=${body}`;
+  }
+
+  function enlargeNo() {
+    const button = document.getElementById('noButton');
+    button.classList.add('enlarge'); 
+    noCount++;
+    if (noCount >= 5) {
+      window.location.href = "https://www.youtube.com/watch?v=uQnIGTaEiFU";
+    } else {
+      const maxWidth = window.innerWidth - button.offsetWidth;
+      const maxHeight = window.innerHeight - button.offsetHeight;
+      const newX = Math.random() * maxWidth;
+      const newY = Math.random() * maxHeight;
+      button.style.left = newX + 'px';
+      button.style.top = newY + 'px';
+    }
+    setTimeout(() => {
+      button.classList.remove('enlarge'); 
+    }, 0);
+  }
+</script>
+</body>
+</html>
